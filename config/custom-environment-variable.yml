@@ -1,0 +1,12 @@
+app:
+  port: PORT
+  secret: APP_SECRET
+
+database:
+  host: DATABASE_HOST
+  type: DATABASE_TYPE
+  port: DATABASE_PORT
+  database: DATABASE_NAME
+  username: DATABASE_USERNAME
+  password: DATABASE_PASSWORD
+  dropSchema: DATABASE_DROP_SCHEMA
