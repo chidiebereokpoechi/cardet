@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm'
 @Entity({ name: 'user' })
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  public id: string
+  public readonly id!: string
 
   @Column({ length: 256 })
   public name: string
@@ -12,11 +12,13 @@ export class User {
   @Column({ length: 256 })
   public room_id: string
 
+  private constructor(name: string) {
+    this.name = name
+    this.room_id = ''
+  }
+
   public static create(name: string): User {
-    const user = new User()
-    user.name = name
-    user.room_id = ''
-    return user
+    return new User(name)
   }
 
   public static update(user: User, updates: Partial<User>): User {

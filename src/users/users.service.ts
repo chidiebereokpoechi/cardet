@@ -6,7 +6,7 @@ import { UsersRepository } from './users.repository'
 @Injectable()
 export class UsersService {
   @Inject(UsersRepository)
-  protected readonly repository: UsersRepository
+  protected readonly repository!: UsersRepository
 
   public async create(): Promise<User> {
     return this.repository.save(User.create(getRandomName()))
@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   public async update(id: string, model: Partial<User>) {
-    const player = await this.retrieve(id)
-    return this.repository.save(User.update(player, model))
+    const user = await this.retrieve(id)
+    return this.repository.save(User.update(user as User, model))
   }
 }

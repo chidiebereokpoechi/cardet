@@ -16,7 +16,7 @@ import { LoggedInGuard, LogInGuard } from './guards'
 @Controller('auth')
 export class AuthController {
   @Inject(AuthService)
-  public readonly service: AuthService
+  public readonly service!: AuthService
 
   @HttpCode(HttpStatus.OK)
   @UseGuards(LogInGuard)

@@ -11,6 +11,9 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "noUnusedParameters": true,
     "paths": {
       "cardet/*": ["src/*"]
     }

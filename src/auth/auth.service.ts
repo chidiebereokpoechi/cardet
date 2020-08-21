@@ -6,10 +6,10 @@ import { UsersService } from 'cardet/users'
 @Injectable()
 export class AuthService {
   @Inject(UsersService)
-  protected readonly service: UsersService
+  protected readonly service!: UsersService
 
   @Inject(JwtService)
-  protected readonly jwt_service: JwtService
+  protected readonly jwt_service!: JwtService
 
   public async verify(id: string) {
     return await this.service.retrieve(id)
