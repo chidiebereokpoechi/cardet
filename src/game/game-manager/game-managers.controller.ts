@@ -6,13 +6,15 @@ import {
   Param,
   ParseUUIDPipe,
   Post,
+  UseGuards,
 } from '@nestjs/common'
-import { ConnectedUser } from 'cardet/auth'
+import { ConnectedUser, LoggedInGuard } from 'cardet/auth'
 import { User } from 'cardet/database'
 import { ServiceResponse } from 'cardet/util'
 import { GameManagersService } from './game-managers.service'
 import { PlayCardsModel } from './models'
 
+@UseGuards(LoggedInGuard)
 @Controller('game-managers')
 export class GameManagersController {
   @Inject(GameManagersService)

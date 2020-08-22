@@ -55,7 +55,14 @@ export class RoomsService {
     }
 
     room.addUser(user)
-    await this.users_service.update(user.id, user)
+    await this.users_service.update(user.id, { room_id })
+    return this.collection.update(room)
+  }
+
+  public async leaveRoom(user: User) {
+    const room = this.retrieve(user.room_id)
+    room.removeUser(user)
+    await this.users_service.update(user.id, { room_id: '' })
     return this.collection.update(room)
   }
 }

@@ -1,5 +1,5 @@
 import { User } from 'cardet/database'
-import { find } from 'lodash'
+import { find, remove } from 'lodash'
 import { v4 } from 'uuid'
 import { GameManager } from '../game-manager'
 
@@ -16,7 +16,7 @@ export class GameRoom {
   public game_manager_id!: string
 
   private constructor(creator: User) {
-    this.id = v4()
+    this.id = v4().split('-')[0]
     this.creator = creator
     this.members = [creator]
     this.room_state = RoomState.LOBBY
@@ -28,6 +28,10 @@ export class GameRoom {
 
   public addUser(user: User) {
     this.members.push(user)
+  }
+
+  public removeUser(user: User) {
+    remove(this.members, { id: user.id })
   }
 
   public static create(creator: User) {

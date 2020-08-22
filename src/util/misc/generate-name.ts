@@ -29,5 +29,5 @@ const names = [
 ]
 
 export const getRandomName = (): string => {
-  return sample(names) + ' - ' + v4().slice(0, 3)
+  return sample(names) + ' ' + v4().slice(0, 4)
 }
