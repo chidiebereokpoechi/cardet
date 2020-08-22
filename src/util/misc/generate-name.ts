@@ -1,3 +1,4 @@
+import { sample } from 'lodash'
 import { v4 } from 'uuid'
 
 const names = [
@@ -28,6 +29,5 @@ const names = [
 ]
 
 export const getRandomName = (): string => {
-  const index = Math.floor(Math.random() * names.length)
-  return names[index] + ' - ' + v4().slice(0, 3)
+  return sample(names) + ' - ' + v4().slice(0, 3)
 }

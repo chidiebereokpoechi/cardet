@@ -1,4 +1,14 @@
-import { filter, find, forEach, map, reduce, slice, some } from 'lodash'
+import {
+  filter,
+  find,
+  forEach,
+  inRange,
+  last,
+  map,
+  reduce,
+  slice,
+  some,
+} from 'lodash'
 import { v4 } from 'uuid'
 import { Card } from '../card'
 import { Serializable } from '../misc'
@@ -33,7 +43,7 @@ export class Game implements Serializable {
   }
 
   public get center_card() {
-    return this.played_cards[this.played_cards.length - 1]
+    return last(this.played_cards) as Card
   }
 
   public get match_card() {
@@ -95,7 +105,9 @@ export class Game implements Serializable {
   }
 
   public peekNextTurn() {
-    return this.turn_index + 1 === this.players.length ? 0 : this.turn_index + 1
+    return inRange(this.turn_index + 1, 0, this.players.length)
+      ? this.turn_index + 1
+      : 0
   }
 
   public canAccept(card: Card) {

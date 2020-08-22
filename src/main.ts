@@ -26,5 +26,5 @@ function runTest() {
   testEngine()
 }
 
-// bootstrap()
-runTest()
+bootstrap()
+// runTest()

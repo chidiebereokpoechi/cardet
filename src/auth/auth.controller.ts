@@ -21,7 +21,7 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @UseGuards(LogInGuard)
   @Post()
-  public log_in(@ConnectedUser() user: User) {
+  public logIn(@ConnectedUser() user: User) {
     return ServiceResponse.create({
       data: this.service.logIn(user),
       message: 'User logged in',
@@ -30,7 +30,7 @@ export class AuthController {
 
   @UseGuards(LoggedInGuard)
   @Get()
-  public get_user(@ConnectedUser() user: User) {
+  public getUser(@ConnectedUser() user: User) {
     return ServiceResponse.create({
       data: user,
       message: 'User details retrieved',

@@ -39,3 +39,26 @@ export const ALL_CARD_VALUES = [
   CardValue.BLOCK,
   CardValue.FREEZE,
 ]
+
+export const NUMERIC_CARD_VALUES = [
+  CardValue.ZERO,
+  CardValue.ONE,
+  CardValue.TWO,
+  CardValue.THREE,
+  CardValue.FOUR,
+  CardValue.FIVE,
+  CardValue.SIX,
+  CardValue.SEVEN,
+  CardValue.EIGHT,
+  CardValue.NINE,
+  CardValue.TEN,
+]
+
+export const ACTION_CARD_VALUES = [
+  CardValue.ANY,
+  CardValue.PICK_TWO,
+  CardValue.PICK_THREE,
+  CardValue.GENERAL_MARKET,
+  CardValue.BLOCK,
+  CardValue.FREEZE,
+]

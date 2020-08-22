@@ -1,5 +1,13 @@
 import { User } from 'cardet/database'
-import { filter, forEach, includes, map, sortBy, uniqueId } from 'lodash'
+import {
+  filter,
+  forEach,
+  includes,
+  inRange,
+  map,
+  sortBy,
+  uniqueId,
+} from 'lodash'
 import { Card } from '../card'
 import { Serializable } from '../misc'
 import { SerializedPlayer } from './serialized-player'
@@ -26,7 +34,7 @@ export class Player implements Serializable {
   }
 
   public selectCard(index: number) {
-    if (index < 0 || index > this.cards_count - 1) {
+    if (inRange(index, 0, this.cards_count)) {
       throw new Error('Invalid card selection')
     }
 
