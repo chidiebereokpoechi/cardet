@@ -52,7 +52,7 @@ export class Game implements Serializable {
 
   private constructor(players: Player[], deck: Card[]) {
     this.id = v4()
-    this.market = deck ?? Card.shuffleCards(deck)
+    this.market = Card.shuffleCards(deck)
     this.players = players
     this.played_cards = this.drawCards(1)
     this.attempted_cards = []

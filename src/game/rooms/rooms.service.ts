@@ -29,7 +29,7 @@ export class RoomsService {
   }
 
   public retrieve(id: string) {
-    const room = this.collection.findOne({ id })
+    const room = this.collection.findOne({ id: id.toUpperCase() })
 
     if (!room) {
       throw new Error(`There was an error retrieving room ${id}`)
@@ -54,15 +54,13 @@ export class RoomsService {
       throw new Error('Error joining room')
     }
 
-    room.addUser(user)
-    await this.users_service.update(user.id, { room_id })
+    room.addUser(await this.users_service.update(user.id, { room_id }))
     return this.collection.update(room)
   }
 
   public async leaveRoom(user: User) {
     const room = this.retrieve(user.room_id)
-    room.removeUser(user)
-    await this.users_service.update(user.id, { room_id: '' })
+    room.removeUser(await this.users_service.update(user.id, { room_id: '' }))
     return this.collection.update(room)
   }
 }

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Inject,
   Param,
@@ -62,6 +63,25 @@ export class GameManagersController {
     return ServiceResponse.create({
       data: this.service.sort(id, user),
       message: 'Cards sorted successfully',
+    })
+  }
+
+  @Post(':id')
+  public async start(
+    @Param('id', ParseUUIDPipe) id: string,
+    @ConnectedUser() user: User,
+  ) {
+    return ServiceResponse.create({
+      data: this.service.startGame(id, user),
+      message: 'Game started successfully',
+    })
+  }
+
+  @Delete(':id')
+  public async end(@Param('id', ParseUUIDPipe) id: string) {
+    return ServiceResponse.create({
+      data: this.service.endGame(id),
+      message: 'Game ended successfully',
     })
   }
 }

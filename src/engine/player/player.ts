@@ -34,7 +34,7 @@ export class Player implements Serializable {
   }
 
   public selectCard(index: number) {
-    if (inRange(index, 0, this.cards_count)) {
+    if (!inRange(index, 0, this.cards_count)) {
       throw new Error('Invalid card selection')
     }
 

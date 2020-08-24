@@ -54,6 +54,7 @@ export class GameManager {
   }
 
   public getGameState(user: User) {
+    if (!this.game) return null
     const player = this.getPlayer(user)
     return {
       play_count: this.play_count,
