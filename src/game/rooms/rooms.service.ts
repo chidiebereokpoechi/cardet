@@ -54,7 +54,7 @@ export class RoomsService {
       throw new Error('Error joining room')
     }
 
-    room.addUser(await this.users_service.update(user.id, { room_id }))
+    room.addUser(await this.users_service.update(user.id, { room_id: room.id }))
     return this.collection.update(room)
   }
 

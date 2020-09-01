@@ -41,7 +41,7 @@ export class GameManager {
       ...Card.createManyOfType(CardType.DELTA, ALL_CARD_VALUES),
       ...Card.createManyOfType(CardType.ECHO, ALL_CARD_VALUES),
       ...Card.createManyOfType(CardType.FOXTROT, ALL_CARD_VALUES),
-      ...Card.createManyOfType(CardType.ANY, ACTION_CARD_VALUES),
+      ...Card.createManyOfType(CardType.ALPHA, ACTION_CARD_VALUES),
     ]
 
     this.previous_game = this.game

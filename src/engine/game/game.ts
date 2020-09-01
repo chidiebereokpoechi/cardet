@@ -112,14 +112,13 @@ export class Game implements Serializable {
 
   public canAccept(card: Card) {
     return (
-      this.current_rule.canAccept?.(this) ??
+      this.current_rule.canAccept?.(this, card) ??
       Card.matches(this.center_card, card)
     )
   }
 
   public checkCards(cards: Card[]) {
     if (!Card.canStack(cards)) {
-      console.table(cards)
       throw new Error('You cannot stack these cards together')
     }
 

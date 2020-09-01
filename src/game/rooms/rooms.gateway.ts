@@ -68,7 +68,6 @@ export class RoomsGateway implements OnGatewayConnection {
   ) {
     const { room_id, user } = data
     client.to(room_id).broadcast.emit('started-game', user)
-    client.leaveAll()
   }
 
   @SubscribeMessage('end-game')
@@ -90,6 +89,5 @@ export class RoomsGateway implements OnGatewayConnection {
   ) {
     const { room_id, user } = data
     client.to(room_id).broadcast.emit('played', user)
-    client.leaveAll()
   }
 }

@@ -1,4 +1,4 @@
-import { every, map, shuffle, uniq } from 'lodash'
+import { every, flatten, map, shuffle, times, uniq } from 'lodash'
 import { v4 } from 'uuid'
 import { CardDefinition } from './card-pair'
 import { CardType } from './card-type'
@@ -25,20 +25,31 @@ export class Card {
     return map(cards, card => this.create(card))
   }
 
-  public static createManyOfType(type: CardType, values: CardValue[]) {
-    return map(uniq(values), value => this.create([type, value]))
+  public static createManyOfType(
+    type: CardType,
+    values: CardValue[],
+    n: number = 1,
+  ) {
+    const mapped = () => map(uniq(values), value => this.create([type, value]))
+    const nested = times(n, mapped)
+    return flatten(nested)
   }
 
-  public static createManyOfValue(value: CardValue, types: CardType[]) {
-    return map(uniq(types), type => this.create([type, value]))
+  public static createManyOfValue(
+    value: CardValue,
+    types: CardType[],
+    n: number = 1,
+  ) {
+    const mapped = () => map(uniq(types), type => this.create([type, value]))
+    const nested = times(n, mapped)
+    return flatten(nested)
   }
 
   public static matches(bottom: Card, top: Card) {
     return (
       bottom.type === top.type ||
       bottom.value === top.value ||
-      bottom.value === CardValue.ANY ||
-      top.value === CardValue.ANY
+      bottom.value === CardValue.ANY
     )
   }
 

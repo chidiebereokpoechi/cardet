@@ -1,3 +1,4 @@
+import { Card } from 'cardet/engine/card'
 import { Game } from 'cardet/engine/game'
 import { RuleManager } from '../../rule-manager'
 import { Action } from '../../rule-manager/action'
@@ -34,8 +35,29 @@ export class PickRule implements Rule {
     }
   }
 
-  public nextRule(game: Game): Rule {
-    const { pending_action, match_card } = game
+  public canAccept(game: Game, card?: Card): boolean {
+    const { pending_action, center_card } = game
+    const match_card = card ?? game.match_card
+    const rule = RuleManager.getRuleForValue(match_card.value)
+
+    if (!(pending_action instanceof PickAction)) {
+      const matches = Card.matches(center_card, match_card)
+      return Card.matches(center_card, match_card)
+    }
+
+    if (
+      !(rule instanceof BlockRule) &&
+      !(rule instanceof PickRule && this.pick_count === rule.pick_count)
+    ) {
+      return false
+    }
+
+    return true
+  }
+
+  public nextRule(game: Game, card?: Card): Rule {
+    const { pending_action } = game
+    const match_card = card ?? game.match_card
     const rule = RuleManager.getRuleForValue(match_card.value)
 
     if (!(pending_action instanceof PickAction)) {
