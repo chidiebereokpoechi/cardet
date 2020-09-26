@@ -29,6 +29,7 @@ export class Game implements Serializable {
   public current_rule: Rule
   public pending_action: Action
   public has_winner: boolean
+  public winner?: Player
 
   public get current_player() {
     return this.players[this.turn_index]
@@ -72,7 +73,8 @@ export class Game implements Serializable {
   }
 
   public hasWinner() {
-    this.has_winner = some(this.players, { 'cards.length': 0 })
+    this.winner = find(this.players, player => player.cards.length === 0)
+    this.has_winner = this.winner !== undefined
   }
 
   public drawCards(count: number = 1): Card[] {
@@ -162,6 +164,7 @@ export class Game implements Serializable {
       this.interpret()
       this.nextTurn()
       player.releaseCards()
+      this.hasWinner()
     } catch (error) {
       console.log(error.message)
     }

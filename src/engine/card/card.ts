@@ -3,6 +3,7 @@ import { v4 } from 'uuid'
 import { CardDefinition } from './card-pair'
 import { CardType } from './card-type'
 import { CardValue } from './card-value'
+import { SerializedCard } from './serialized-card'
 
 export class Card {
   public readonly id: string
@@ -15,6 +16,10 @@ export class Card {
     this.type = type
     this.value = value
     this.name = `${CardType[type]} ${CardValue[value]}`
+  }
+
+  public serialize(): SerializedCard {
+    return { id: this.id }
   }
 
   public static create(card: CardDefinition) {

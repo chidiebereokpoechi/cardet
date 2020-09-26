@@ -56,13 +56,22 @@ export class GameManager {
   public getGameState(user: User) {
     if (!this.game) return null
     const player = this.getPlayer(user)
-    return {
+    const state = {
       play_count: this.play_count,
       ...this.game?.serialize(player.id),
+    }
+
+    return state
+  }
+
+  public checkGameOver() {
+    if (this.game?.has_winner) {
+      throw new Error('Game is over')
     }
   }
 
   public play(user: User, indices: number[]) {
+    this.checkGameOver()
     const player = this.getPlayer(user)
     player.selectCards(...indices)
     this.game?.play(player)
@@ -70,12 +79,14 @@ export class GameManager {
   }
 
   public pick(user: User) {
+    this.checkGameOver()
     const player = this.getPlayer(user)
     this.game?.pick(player)
     this.play_count++
   }
 
   public sort(user: User) {
+    this.checkGameOver()
     const player = this.getPlayer(user)
     player.sortCards()
   }

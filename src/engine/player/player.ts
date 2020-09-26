@@ -75,7 +75,7 @@ export class Player implements Serializable {
     return {
       id: this.user.id,
       name: this.user.name,
-      cards_count: this.cards_count,
+      cards: this.cards.map(card => card.serialize()),
     }
   }
 
