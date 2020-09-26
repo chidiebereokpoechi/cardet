@@ -6,6 +6,7 @@ export const DEFAULT_RULE = new DefaultRule()
 export const PICK_TWO_RULE = new PickRule(2, PickType.NEXT_PLAYER)
 export const PICK_THREE_RULE = new PickRule(3, PickType.NEXT_PLAYER)
 export const BLOCK_RULE = new BlockRule()
+export const HOLD_ON_RULE = new DefaultRule({ should_freeze_turn: true })
 export const GENERAL_MARKET_RULE = new PickRule(1, PickType.OTHER_PLAYERS, {
   blockable: false,
   should_freeze_turn: true,

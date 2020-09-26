@@ -7,7 +7,6 @@ import {
   map,
   reduce,
   slice,
-  some,
 } from 'lodash'
 import { v4 } from 'uuid'
 import { Card } from '../card'
@@ -208,6 +207,7 @@ export class Game implements Serializable {
       playable_cards_indices,
       market_count: this.market.length,
       game_over: this.has_winner,
+      game_winner: this.winner?.serialize() ?? null,
     }
   }
 

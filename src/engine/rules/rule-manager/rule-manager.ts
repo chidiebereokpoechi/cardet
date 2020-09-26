@@ -3,6 +3,7 @@ import {
   BLOCK_RULE,
   DEFAULT_RULE,
   GENERAL_MARKET_RULE,
+  HOLD_ON_RULE,
   PICK_THREE_RULE,
   PICK_TWO_RULE,
 } from '../rules'
@@ -19,6 +20,10 @@ export class RuleManager {
         return GENERAL_MARKET_RULE
       case CardValue.BLOCK:
         return BLOCK_RULE
+      case CardValue.FREEZE:
+        return HOLD_ON_RULE
+      case CardValue.ANY:
+        return HOLD_ON_RULE
       default:
         return DEFAULT_RULE
     }
