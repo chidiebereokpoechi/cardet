@@ -29,7 +29,12 @@ export class GameManagersService {
     const game_manager = this.collection.findOne({ id: room?.game_manager_id })
 
     if (!room || !game_manager) {
-      throw new Error('There was a problem retrieving the game manager')
+      console.error('There was a problem retrieving the game manager')
+
+      return {
+        room: null,
+        game_manager: null,
+      }
     }
 
     return {

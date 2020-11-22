@@ -120,10 +120,12 @@ export class Game implements Serializable {
 
   public checkCards(cards: Card[]) {
     if (!Card.canStack(cards)) {
+      console.log(cards)
       throw new Error('You cannot stack these cards together')
     }
 
     if (!this.canAccept(cards[0])) {
+      console.log(cards)
       throw new Error('You cannot play that card')
     }
 
