@@ -35,13 +35,21 @@ export class GameManager {
 
   public startGame(users: User[]) {
     const STANDARD_DECK = [
+      // All cards
       ...Card.createManyOfType(CardType.ALPHA, ALL_CARD_VALUES),
       ...Card.createManyOfType(CardType.BRAVO, ALL_CARD_VALUES),
       ...Card.createManyOfType(CardType.CHARLIE, ALL_CARD_VALUES),
       ...Card.createManyOfType(CardType.DELTA, ALL_CARD_VALUES),
       ...Card.createManyOfType(CardType.ECHO, ALL_CARD_VALUES),
       ...Card.createManyOfType(CardType.FOXTROT, ALL_CARD_VALUES),
+
+      //  Extra action cards
       ...Card.createManyOfType(CardType.ALPHA, ACTION_CARD_VALUES),
+      ...Card.createManyOfType(CardType.BRAVO, ACTION_CARD_VALUES),
+      ...Card.createManyOfType(CardType.CHARLIE, ACTION_CARD_VALUES),
+      ...Card.createManyOfType(CardType.DELTA, ACTION_CARD_VALUES),
+      ...Card.createManyOfType(CardType.ECHO, ACTION_CARD_VALUES),
+      ...Card.createManyOfType(CardType.FOXTROT, ACTION_CARD_VALUES),
     ]
 
     this.previous_game = this.game
