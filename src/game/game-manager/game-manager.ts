@@ -1,10 +1,5 @@
 import { User } from 'cardet/database'
-import {
-  ACTION_CARD_VALUES,
-  ALL_CARD_VALUES,
-  Card,
-  CardType,
-} from 'cardet/engine/card'
+import { Card, CardType, DISTRIBUTED_VALUES } from 'cardet/engine/card'
 import { Game } from 'cardet/engine/game'
 import { Player } from 'cardet/engine/player'
 import { find, map } from 'lodash'
@@ -35,21 +30,12 @@ export class GameManager {
 
   public startGame(users: User[]) {
     const STANDARD_DECK = [
-      // All cards
-      ...Card.createManyOfType(CardType.ALPHA, ALL_CARD_VALUES),
-      ...Card.createManyOfType(CardType.BRAVO, ALL_CARD_VALUES),
-      ...Card.createManyOfType(CardType.CHARLIE, ALL_CARD_VALUES),
-      ...Card.createManyOfType(CardType.DELTA, ALL_CARD_VALUES),
-      ...Card.createManyOfType(CardType.ECHO, ALL_CARD_VALUES),
-      ...Card.createManyOfType(CardType.FOXTROT, ALL_CARD_VALUES),
-
-      //  Extra action cards
-      ...Card.createManyOfType(CardType.ALPHA, ACTION_CARD_VALUES),
-      ...Card.createManyOfType(CardType.BRAVO, ACTION_CARD_VALUES),
-      ...Card.createManyOfType(CardType.CHARLIE, ACTION_CARD_VALUES),
-      ...Card.createManyOfType(CardType.DELTA, ACTION_CARD_VALUES),
-      ...Card.createManyOfType(CardType.ECHO, ACTION_CARD_VALUES),
-      ...Card.createManyOfType(CardType.FOXTROT, ACTION_CARD_VALUES),
+      ...Card.createManyOfType(CardType.ALPHA, DISTRIBUTED_VALUES),
+      ...Card.createManyOfType(CardType.BRAVO, DISTRIBUTED_VALUES),
+      ...Card.createManyOfType(CardType.CHARLIE, DISTRIBUTED_VALUES),
+      ...Card.createManyOfType(CardType.DELTA, DISTRIBUTED_VALUES),
+      ...Card.createManyOfType(CardType.ECHO, DISTRIBUTED_VALUES),
+      ...Card.createManyOfType(CardType.FOXTROT, DISTRIBUTED_VALUES),
     ]
 
     this.previous_game = this.game
