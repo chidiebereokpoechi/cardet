@@ -12,8 +12,6 @@ import { AppModule } from './app.module'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
-  console.log(get('database'))
-
   app.setGlobalPrefix('api')
   app.useGlobalPipes(
     new ValidationPipe({

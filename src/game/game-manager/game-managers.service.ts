@@ -50,7 +50,12 @@ export class GameManagersService {
     const game_manager = this.collection.findOne({ id })
 
     if (!room || !game_manager) {
-      throw new Error('There was a problem retrieving the game manager')
+      console.error('There was a problem retrieving the game manager')
+
+      return {
+        room: null,
+        game_manager: null,
+      }
     }
 
     return {
@@ -61,40 +66,70 @@ export class GameManagersService {
 
   public startGame(id: string, user: User) {
     const { room, game_manager } = this.retrievePair(id)
-    game_manager.startGame(room.members)
-    this.collection.update(game_manager)
-    return game_manager.getGameState(user)
+
+    if (room && game_manager) {
+      game_manager.startGame(room.members)
+      this.collection.update(game_manager)
+      return game_manager.getGameState(user)
+    }
+
+    return null
   }
 
   public endGame(id: string) {
     const { game_manager } = this.retrievePair(id)
-    game_manager.endGame()
-    return this.collection.update(game_manager)
+
+    if (game_manager) {
+      game_manager.endGame()
+      return this.collection.update(game_manager)
+    }
+
+    return null
   }
 
   public getGameState(id: string, user: User) {
     const { game_manager } = this.retrievePair(id)
-    return game_manager.getGameState(user)
+
+    if (game_manager) {
+      return game_manager.getGameState(user)
+    }
+
+    return null
   }
 
   public play(id: string, user: User, indices: number[]) {
     const { game_manager } = this.retrievePair(id)
-    game_manager.play(user, indices)
-    this.collection.update(game_manager)
-    return game_manager.getGameState(user)
+
+    if (game_manager) {
+      game_manager.play(user, indices)
+      this.collection.update(game_manager)
+      return game_manager.getGameState(user)
+    }
+
+    return null
   }
 
   public pick(id: string, user: User) {
     const { game_manager } = this.retrievePair(id)
-    game_manager.pick(user)
-    this.collection.update(game_manager)
-    return game_manager.getGameState(user)
+
+    if (game_manager) {
+      game_manager.pick(user)
+      this.collection.update(game_manager)
+      return game_manager.getGameState(user)
+    }
+
+    return null
   }
 
   public sort(id: string, user: User) {
     const { game_manager } = this.retrievePair(id)
-    game_manager.sort(user)
-    this.collection.update(game_manager)
-    return game_manager.getPlayer(user)
+
+    if (game_manager) {
+      game_manager.sort(user)
+      this.collection.update(game_manager)
+      return game_manager.getPlayer(user)
+    }
+
+    return null
   }
 }
