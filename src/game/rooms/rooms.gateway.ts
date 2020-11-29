@@ -85,9 +85,19 @@ export class RoomsGateway implements OnGatewayConnection {
   public async play(
     @ConnectedSocket() client: Socket,
     @MessageBody()
-    data: { room_id: string; user: User },
+    data: { room_id: string; user: User; message: string },
   ) {
     const { room_id, user } = data
     client.to(room_id).broadcast.emit('played', user)
+  }
+
+  @SubscribeMessage('create-message')
+  public async message(
+    @ConnectedSocket() client: Socket,
+    @MessageBody()
+    data: { room_id: string; user: User; message: string },
+  ) {
+    const { room_id, user, message } = data
+    client.to(room_id).broadcast.emit('created-message', { user, message })
   }
 }

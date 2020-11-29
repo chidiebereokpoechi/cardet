@@ -1,4 +1,5 @@
 export * from './game.module'
 export * from './game-manager'
+export * from './message'
 export * from './rooms'
 export * from './store'

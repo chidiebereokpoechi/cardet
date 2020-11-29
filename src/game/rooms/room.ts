@@ -1,7 +1,8 @@
 import { User } from 'cardet/database'
-import { find, remove, uniqueId } from 'lodash'
+import { find, remove } from 'lodash'
 import { v4 } from 'uuid'
 import { GameManager } from '../game-manager'
+import { Message } from '../message'
 
 export enum RoomState {
   LOBBY,
@@ -12,6 +13,7 @@ export class GameRoom {
   public id: string
   public members: User[]
   public creator: User
+  public messages: Message[]
   public room_state: RoomState
   public game_manager_id!: string
 
@@ -21,6 +23,7 @@ export class GameRoom {
       .toUpperCase()
     this.creator = creator
     this.members = [creator]
+    this.messages = []
     this.room_state = RoomState.LOBBY
   }
 
@@ -34,6 +37,10 @@ export class GameRoom {
 
   public removeUser(user: User) {
     remove(this.members, { id: user.id })
+  }
+
+  public createMessage(user: User, message: string) {
+    this.messages.push({ user, message })
   }
 
   public static create(creator: User) {

@@ -58,6 +58,17 @@ export class RoomsService {
     return this.collection.update(room)
   }
 
+  public async createMessage(user: User, room_id: string, message: string) {
+    const room = this.retrieve(room_id)
+
+    if (!room.containsUser(user)) {
+      throw new Error('User is not in the room')
+    }
+
+    room.createMessage(user, message)
+    return this.collection.update(room)
+  }
+
   public async leaveRoom(user: User) {
     const room = this.retrieve(user.room_id)
     room.removeUser(await this.users_service.update(user.id, { room_id: '' }))
